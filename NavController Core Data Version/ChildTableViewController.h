@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Company.h"
 
 @interface ChildTableViewController : UITableViewController <UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UILabel *childVCTitleLabel;
 
+@property (nonatomic) Company *selectedCompany;
 
 @end

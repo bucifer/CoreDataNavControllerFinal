@@ -17,7 +17,6 @@
 @interface ParentTableViewController :UITableViewController;
 
 @property (strong) DAO *dao;
-@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
 @property (strong, nonatomic) IBOutlet UITableViewCell *parentViewCell;
 

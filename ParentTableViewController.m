@@ -44,7 +44,7 @@
     [super viewDidLoad];
     
     self.title = @"Mobile device makers";
-    self.titleLabel.text = self.title;
+//    self.titleLabel.text = self.title;
     
     self.dao = [[DAO alloc]init];
     
@@ -54,24 +54,7 @@
                                                object:nil];
     
     Reachability * reach = [Reachability reachabilityWithHostname:@"www.google.com"];
-    
-//    reach.reachableBlock = ^(Reachability * reachability)
-//    {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            NSLog(@"Internet Reachable");
-//        });
-//    };
-//    
-//    reach.unreachableBlock = ^(Reachability * reachability)
-//    {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            NSLog(@"Internet UNReachable");
-//        });
-//    };
-    
     [reach startNotifier];
-    
-    
     
     [self.tableView reloadData];
     
@@ -95,10 +78,12 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     ChildTableViewController *childVC = [segue destinationViewController];
+    if([segue.identifier isEqualToString:@"childViewSegue"]) {
+
+        childVC.title = @"TERRY ITS WORKING";
+        
+    }
 }
-
-
-
 
 - (void)didReceiveMemoryWarning
 {
@@ -138,9 +123,6 @@
             cell.textLabel.text = [NSString stringWithFormat:@"%@ %@ (stock price outdated due to loss of internet connection)", selectedCompany.name, selectedCompany.stockPrice];
             cell.textLabel.backgroundColor = [UIColor redColor];
         }
-
-        
-        
     }
 
     return cell;
@@ -154,9 +136,7 @@
 //    self.childVC.company = selectedCompany;
 //    self.childVC.dao = self.dao;
     
-//    [self.navigationController
-//     pushViewController:childVC
-//     animated:YES];
+    Company* selectedCompany = [self.dao.companies objectAtIndex:indexPath.row];
     
     [self performSegueWithIdentifier:@"childViewSegue" sender:self];
 

@@ -19,15 +19,6 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" tableViewCell="CAl-7O-U0L" id="7rA-f7-Tbs">
                                     <rect key="frame" x="0.0" y="0.0" width="287" height="60"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vAO-3a-3gB">
-                                            <rect key="frame" x="139" y="19" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="Dyg-9q-Dwc" kind="push" identifier="childViewSegue" id="Moo-bh-rEo"/>
@@ -42,7 +33,6 @@
                     <navigationItem key="navigationItem" id="jSn-29-2RB"/>
                     <connections>
                         <outlet property="parentViewCell" destination="CAl-7O-U0L" id="2rU-3i-Qfs"/>
-                        <outlet property="titleLabel" destination="vAO-3a-3gB" id="DrT-Ep-HY4"/>
                         <outlet property="whatthe" destination="CAl-7O-U0L" id="hZq-pU-x6e"/>
                     </connections>
                 </tableViewController>
@@ -65,14 +55,6 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mRt-bc-b0X" id="uJV-FQ-CcB">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ftl-U6-dHZ">
-                                            <rect key="frame" x="132" y="11" width="42" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
                                 </tableViewCellContentView>
                             </tableViewCell>
                         </prototypes>
@@ -82,9 +64,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="SxH-gO-isN"/>
-                    <connections>
-                        <outlet property="childVCTitleLabel" destination="ftl-U6-dHZ" id="uNI-78-wfg"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ozE-kA-JTi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
