@@ -80,8 +80,8 @@
     ChildTableViewController *childVC = [segue destinationViewController];
     if([segue.identifier isEqualToString:@"childViewSegue"]) {
 
-        childVC.title = @"TERRY ITS WORKING";
-        
+        childVC.selectedCompany = self.selectedCompany;
+        childVC.title = [self.selectedCompany valueForKey:@"name"];
     }
 }
 
@@ -136,8 +136,7 @@
 //    self.childVC.company = selectedCompany;
 //    self.childVC.dao = self.dao;
     
-    Company* selectedCompany = [self.dao.companies objectAtIndex:indexPath.row];
-    
+    self.selectedCompany = [self.dao.companies objectAtIndex:indexPath.row];
     [self performSegueWithIdentifier:@"childViewSegue" sender:self];
 
 }

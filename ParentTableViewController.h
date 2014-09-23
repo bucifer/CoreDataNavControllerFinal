@@ -20,6 +20,8 @@
 
 @property (strong, nonatomic) IBOutlet UITableViewCell *parentViewCell;
 
+@property Company *selectedCompany;
+
 - (BOOL)connected;
 
 @end

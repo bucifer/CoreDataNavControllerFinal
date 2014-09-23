@@ -20,9 +20,6 @@
 @property (nonatomic, retain) NSSet *product;
 
 
-- (id)initWithName:(NSString *)aName Image:(NSString*)imageName symbol:(NSString*)aSymbol;
-
-
 @end
 
 @interface Company (CoreDataGeneratedAccessors)

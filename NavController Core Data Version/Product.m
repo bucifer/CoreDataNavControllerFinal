@@ -13,7 +13,7 @@
 @implementation Product
 
 @dynamic name;
-@dynamic company_id;
+@dynamic company;
 @dynamic url;
 @dynamic image;
 @dynamic company_relationship;

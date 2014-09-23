@@ -14,7 +14,7 @@
 @interface Product : NSManagedObject
 
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSNumber * company_id;
+@property (nonatomic, retain) NSString * company;
 @property (nonatomic, retain) NSString * url;
 @property (nonatomic, retain) NSString * image;
 @property (nonatomic, retain) Company *company_relationship;

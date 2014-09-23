@@ -36,6 +36,19 @@
     return company;
 }
 
+- (Product*) TBinitProduct: (NSString *)put_name image:(NSString*)put_image url:(NSString *)put_url company:(NSString *)put_company moc:(NSManagedObjectContext*) context {
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Product" inManagedObjectContext:context];
+    Product *product = [[Product alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
+    
+    product.name = put_name;
+    product.image = put_image;
+    product.url = put_url;
+    product.company = put_company;
+    
+    return product;
+}
+
 
 - (id)init {
     NSManagedObjectContext *context = [self managedObjectContext];
@@ -45,7 +58,6 @@
     Company *htc = [self TBinitCompany:@"HTC" image:@"htc.jpg" stockSymbol:@"HTCXF" moc:context];
     Company *motorola = [self TBinitCompany:@"Motorola" image:@"motorola.gif" stockSymbol:@"MSI" moc:context];
     
-    
     self.companies = [[NSMutableArray alloc] initWithObjects:
                       apple, samsung, htc, motorola, nil];
     
@@ -54,9 +66,11 @@
 //
 //    Company *apple1 = self.companies[0];
 //    //Put product objects into the products array for the company
-//    Product *ipad = [[Product alloc]initWithName:@"iPad" Image:@"ipad.png" url:@"https://www.apple.com/ipad/" Company:@"Apple"];
-//    Product *ipod_touch = [[Product alloc]initWithName:@"iPod Touch" Image:@"ipod_touch.png" url:@"http://www.apple.com/ipod-touch" Company:@"Apple"];
-//    Product *iphone = [[Product alloc]initWithName:@"iPhone" Image:@"iphone.png" url:@"https://www.apple.com/iphone/" Company:@"Apple"];
+    
+    Product *ipad = [self TBinitProduct:@"iPad" image:@"ipad.png" url:@"https://www.apple.com/ipad/" company:@"Apple" moc:context];
+    Product *ipodTouch = [self TBinitProduct:@"iPod Touch" image:@"ipod_touch.png" url:@"http://www.apple.com/ipod-touch" company:@"Apple" moc:context];
+    Product *iPhone = [self TBinitProduct:@"iPhone" image:@"iphone.png" url:@"http://www.apple.com/iphone" company:@"Apple" moc:context];
+
 //    apple1.products = [[NSMutableArray alloc]
 //                       initWithObjects:
 //                       ipad, ipod_touch, iphone, nil];

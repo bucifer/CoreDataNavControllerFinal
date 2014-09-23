@@ -44,9 +44,10 @@
 
 #pragma mark - Table view data source
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"TEST";
-}
+//This method just puts a little title at left-top of the tableview, weird useless
+//- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+//    return @"TEST";
+//}
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
