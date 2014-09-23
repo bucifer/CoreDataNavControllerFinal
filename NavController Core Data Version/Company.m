@@ -18,4 +18,17 @@
 @dynamic stockSymbol;
 @dynamic product;
 
+
+- (id)initWithName:(NSString *)aName Image:(NSString*)imageName symbol:(NSString*)aSymbol{
+    self = [super init];
+    if (self) {
+        self.name = aName;
+        self.image = imageName;
+        self.stockSymbol = aSymbol;
+    }
+    return self;
+}
+
+
+
 @end

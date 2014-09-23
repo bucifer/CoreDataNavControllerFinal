@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DAO.h"
+
 
 @interface ParentTableViewController : UITableViewController
 
 
+@property (strong) DAO *dao;
 
+@property (strong, nonatomic) IBOutlet UILabel *titleLabel;
 
 @end

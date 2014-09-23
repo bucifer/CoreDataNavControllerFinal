@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "Reachability.h"
+#import "ParentTableViewController.h"
 
 @implementation AppDelegate
 
@@ -16,7 +18,19 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-
+    // Initialize Reachability
+    Reachability *reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
+    
+    reachability.reachableBlock = ^(Reachability *reachability) {
+        //        NSLog(@"Network is reachable.");
+    };
+    
+    reachability.unreachableBlock = ^(Reachability *reachability) {
+        //        NSLog(@"Network is unreachable.");
+    };
+    
+    // Start Monitoring
+    [reachability startNotifier];
     
     return YES;
 }
