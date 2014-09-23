@@ -48,6 +48,33 @@
     
     self.dao = [[DAO alloc]init];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+    
+    Reachability * reach = [Reachability reachabilityWithHostname:@"www.google.com"];
+    
+    reach.reachableBlock = ^(Reachability * reachability)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Internet Reachable");
+        });
+    };
+    
+    reach.unreachableBlock = ^(Reachability * reachability)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSLog(@"Internet UNReachable");
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Network Connection Alert" message:@"Network Connection Off or Unreachable" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+            [alert show];
+        });
+    };
+    
+    [reach startNotifier];
+    
+    
+    
     [self.tableView reloadData];
     
 }
@@ -98,8 +125,17 @@
     if (!self.dao.companies.count == 0) {
         Company * selectedCompany = [self.dao.companies objectAtIndex:indexPath.row];
         cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", selectedCompany.name, selectedCompany.stockPrice];
-        
         [[cell imageView] setImage: [UIImage imageNamed: selectedCompany.image]];
+        
+        if ([self connected]) {
+            cell.textLabel.backgroundColor = [UIColor whiteColor];
+        } else {
+            cell.textLabel.text = [NSString stringWithFormat:@"%@ %@ (stock price outdated due to loss of internet connection)", selectedCompany.name, selectedCompany.stockPrice];
+            cell.textLabel.backgroundColor = [UIColor redColor];
+        }
+
+        
+        
     }
 
     return cell;
@@ -175,17 +211,20 @@
     return self;
 }
 
-- (void)reachabilityDidChange:(NSNotification *)notification {
-    Reachability *reachability = (Reachability *)[notification object];
+
+-(void)reachabilityChanged:(NSNotification*)note
+{
+    Reachability * reach = [note object];
     
-    if ([reachability isReachable]) {
-        NSLog(@"Network Reachable");
-    }
-    if (![self connected]) {
-        NSLog(@"Network Unreachable");
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Network Connection Alert" message:@"Network Connection Off or Unreachable" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
-        [alert show];
-    }
+//    if([reach isReachable])
+//    {
+//            NSLog(@"Notification is Reachable");
+//    }
+//    else
+//    {
+//        NSLog(@"Network Connection UNReachable");
+
+//    }
 }
 
 #pragma mark NSURLConnection Delegate Methods

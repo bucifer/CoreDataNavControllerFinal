@@ -22,11 +22,11 @@
     Reachability *reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
     
     reachability.reachableBlock = ^(Reachability *reachability) {
-        //        NSLog(@"Network is reachable.");
+//                NSLog(@"From: App Delegate.m: Network is reachable.");
     };
     
     reachability.unreachableBlock = ^(Reachability *reachability) {
-        //        NSLog(@"Network is unreachable.");
+//               NSLog(@"From: App Delegate.m: Network is unreachable.");
     };
     
     // Start Monitoring
