@@ -55,21 +55,19 @@
     
     Reachability * reach = [Reachability reachabilityWithHostname:@"www.google.com"];
     
-    reach.reachableBlock = ^(Reachability * reachability)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Internet Reachable");
-        });
-    };
-    
-    reach.unreachableBlock = ^(Reachability * reachability)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"Internet UNReachable");
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Network Connection Alert" message:@"Network Connection Off or Unreachable" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
-            [alert show];
-        });
-    };
+//    reach.reachableBlock = ^(Reachability * reachability)
+//    {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            NSLog(@"Internet Reachable");
+//        });
+//    };
+//    
+//    reach.unreachableBlock = ^(Reachability * reachability)
+//    {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            NSLog(@"Internet UNReachable");
+//        });
+//    };
     
     [reach startNotifier];
     
@@ -93,6 +91,13 @@
     [self.tableView reloadData];
     
 }
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    ChildTableViewController *childVC = [segue destinationViewController];
+}
+
+
 
 
 - (void)didReceiveMemoryWarning
@@ -140,6 +145,23 @@
 
     return cell;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+//    Company * selectedCompany =
+//    selectedCompany = [self.dao.companies objectAtIndex:indexPath.row];
+//    self.childVC.title = selectedCompany.name;
+//    self.childVC.company = selectedCompany;
+//    self.childVC.dao = self.dao;
+    
+//    [self.navigationController
+//     pushViewController:childVC
+//     animated:YES];
+    
+    [self performSegueWithIdentifier:@"childViewSegue" sender:self];
+
+}
+
 
 /*
 // Override to support conditional editing of the table view.
@@ -200,31 +222,18 @@
     return networkStatus != NotReachable;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    
-    if (self) {
-        // Add Observer
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange:) name:kReachabilityChangedNotification object:nil];
-    }
-    
-    return self;
-}
-
 
 -(void)reachabilityChanged:(NSNotification*)note
 {
     Reachability * reach = [note object];
-    
-//    if([reach isReachable])
-//    {
-//            NSLog(@"Notification is Reachable");
-//    }
-//    else
-//    {
-//        NSLog(@"Network Connection UNReachable");
-
-//    }
+    if([reach isReachable]) {
+       NSLog(@"Internet is Reachable");
+       }
+    else {
+       NSLog(@"Internet Connection UNReachable");
+       UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Network Connection Alert" message:@"Network Connection Off or Unreachable" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+       [alert show];
+    }
 }
 
 #pragma mark NSURLConnection Delegate Methods

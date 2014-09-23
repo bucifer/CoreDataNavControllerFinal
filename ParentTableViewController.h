@@ -9,20 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "DAO.h"
 #import "Reachability.h"
+#import "ChildTableViewController.h"
 
-
+@class ChildTableViewController;
 @class Reachability;
 
-@interface ParentTableViewController : UITableViewController  {
-    
-    Reachability *internetReachableFoo;
-    
-}
-
+@interface ParentTableViewController :UITableViewController;
 
 @property (strong) DAO *dao;
-
 @property (strong, nonatomic) IBOutlet UILabel *titleLabel;
+
+@property (strong, nonatomic) IBOutlet UITableViewCell *parentViewCell;
 
 - (BOOL)connected;
 

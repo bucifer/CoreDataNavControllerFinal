@@ -24,6 +24,7 @@
 		AA6CA29619D215EC001C4EA9 /* moto_x.png in Resources */ = {isa = PBXBuildFile; fileRef = AA6CA28619D215EC001C4EA9 /* moto_x.png */; };
 		AA6CA29719D215EC001C4EA9 /* motorola.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA6CA28719D215EC001C4EA9 /* motorola.gif */; };
 		AA6CA29819D215EC001C4EA9 /* samsung.png in Resources */ = {isa = PBXBuildFile; fileRef = AA6CA28819D215EC001C4EA9 /* samsung.png */; };
+		AA6CA29B19D21EBD001C4EA9 /* ChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6CA29A19D21EBD001C4EA9 /* ChildTableViewController.m */; };
 		AAA1048419D1D79B005BF5A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA1048319D1D79B005BF5A2 /* Foundation.framework */; };
 		AAA1048619D1D79B005BF5A2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA1048519D1D79B005BF5A2 /* CoreGraphics.framework */; };
 		AAA1048819D1D79B005BF5A2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA1048719D1D79B005BF5A2 /* UIKit.framework */; };
@@ -75,6 +76,8 @@
 		AA6CA28619D215EC001C4EA9 /* moto_x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = moto_x.png; sourceTree = "<group>"; };
 		AA6CA28719D215EC001C4EA9 /* motorola.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = motorola.gif; sourceTree = "<group>"; };
 		AA6CA28819D215EC001C4EA9 /* samsung.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = samsung.png; sourceTree = "<group>"; };
+		AA6CA29919D21EBD001C4EA9 /* ChildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTableViewController.h; sourceTree = "<group>"; };
+		AA6CA29A19D21EBD001C4EA9 /* ChildTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildTableViewController.m; sourceTree = "<group>"; };
 		AAA1048019D1D79B005BF5A2 /* NavController Core Data Version.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NavController Core Data Version.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAA1048319D1D79B005BF5A2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AAA1048519D1D79B005BF5A2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -170,6 +173,8 @@
 			isa = PBXGroup;
 			children = (
 				AAA104F419D1DD39005BF5A2 /* Main.storyboard */,
+				AA6CA29919D21EBD001C4EA9 /* ChildTableViewController.h */,
+				AA6CA29A19D21EBD001C4EA9 /* ChildTableViewController.m */,
 				AAA104F619D1DDD9005BF5A2 /* ParentTableViewController.h */,
 				AAA104F719D1DDD9005BF5A2 /* ParentTableViewController.m */,
 				AAA104DB19D1DCB7005BF5A2 /* Reachability.h */,
@@ -358,6 +363,7 @@
 				AAA1049619D1D79B005BF5A2 /* AppDelegate.m in Sources */,
 				AAA1049919D1D79B005BF5A2 /* NavController_Core_Data_Version.xcdatamodeld in Sources */,
 				AAA104F819D1DDD9005BF5A2 /* ParentTableViewController.m in Sources */,
+				AA6CA29B19D21EBD001C4EA9 /* ChildTableViewController.m in Sources */,
 				AAA1050D19D205AD005BF5A2 /* DAO.m in Sources */,
 				AAA1049219D1D79B005BF5A2 /* main.m in Sources */,
 				AAA104EB19D1DCB7005BF5A2 /* Reachability.m in Sources */,
