@@ -81,15 +81,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    self.productsArrayForAppropriateCompany = [[NSMutableArray alloc]init];
-    
-    for (int i=0; i < self.products.count; i++) {
-        Product* selectedProduct = self.products[i];
-        if ([selectedProduct.company isEqualToString:self.selectedCompany.name]) {
-            [self.productsArrayForAppropriateCompany addObject:selectedProduct];
-        }
-    }
-    
     return self.productsArrayForAppropriateCompany.count;
 }
 
@@ -114,9 +105,7 @@
 //IMPORTANT - this is the DELEGATE happens when you SELECT/PRESS on the row
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     self.selectedProduct = [self.productsArrayForAppropriateCompany objectAtIndex:indexPath.row];
-    
     [self performSegueWithIdentifier:@"thirdViewSegue" sender:self];
 }
 
@@ -131,22 +120,14 @@
 
 
 //DELETE DELEGATE
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (editingStyle == UITableViewCellEditingStyleDelete) {
-//        // Delete the row from the data source and then from the TableView
-//        NSArray *productsArray = [self.selectedCompany.product_relationship allObjects];
-//        NSNumber *indexNum = [NSNumber numberWithInteger:indexPath.row];
-//        
-//        for (int i=0; i < productsArray.count; i++) {
-//            Product* selectedProduct = productsArray[i];
-//            if ([selectedProduct.order_id isEqualToNumber:indexNum]) {
-//                [self.selectedCompany removeProduct_relationshipObject:selectedProduct];
-//            }
-//        }
-//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-//    }
-//}
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        // Delete the row from the data source and then from the TableView
+        [self.productsArrayForAppropriateCompany removeObjectAtIndex:indexPath.row];
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
 
 
 /*

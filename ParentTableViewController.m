@@ -78,6 +78,17 @@
         childVC.title = [self.selectedCompany valueForKey:@"name"];
         childVC.selectedCompany = self.selectedCompany;
         childVC.products = self.dao.products;
+        
+        NSMutableArray* productsArrayForAppropriateCompany = [[NSMutableArray alloc]init];
+        
+        for (int i=0; i < childVC.products.count; i++) {
+            Product* selectedProduct = childVC.products[i];
+            if ([selectedProduct.company isEqualToString:childVC.selectedCompany.name]) {
+                [productsArrayForAppropriateCompany addObject:selectedProduct];
+            }
+        }
+        
+        childVC.productsArrayForAppropriateCompany = productsArrayForAppropriateCompany;
     }
 }
 
