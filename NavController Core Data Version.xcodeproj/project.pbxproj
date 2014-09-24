@@ -25,6 +25,7 @@
 		AA6CA29719D215EC001C4EA9 /* motorola.gif in Resources */ = {isa = PBXBuildFile; fileRef = AA6CA28719D215EC001C4EA9 /* motorola.gif */; };
 		AA6CA29819D215EC001C4EA9 /* samsung.png in Resources */ = {isa = PBXBuildFile; fileRef = AA6CA28819D215EC001C4EA9 /* samsung.png */; };
 		AA6CA29B19D21EBD001C4EA9 /* ChildTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA6CA29A19D21EBD001C4EA9 /* ChildTableViewController.m */; };
+		AA996B4A19D31BBE004CB7DE /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = AA996B4919D31BBE004CB7DE /* Product.m */; };
 		AAA1048419D1D79B005BF5A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA1048319D1D79B005BF5A2 /* Foundation.framework */; };
 		AAA1048619D1D79B005BF5A2 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA1048519D1D79B005BF5A2 /* CoreGraphics.framework */; };
 		AAA1048819D1D79B005BF5A2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA1048719D1D79B005BF5A2 /* UIKit.framework */; };
@@ -43,7 +44,6 @@
 		AAA104EB19D1DCB7005BF5A2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA104DC19D1DCB7005BF5A2 /* Reachability.m */; };
 		AAA104F519D1DD39005BF5A2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAA104F419D1DD39005BF5A2 /* Main.storyboard */; };
 		AAA104F819D1DDD9005BF5A2 /* ParentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA104F719D1DDD9005BF5A2 /* ParentTableViewController.m */; };
-		AAA1050719D2035B005BF5A2 /* Product.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA1050619D2035B005BF5A2 /* Product.m */; };
 		AAA1050A19D2037D005BF5A2 /* Company.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA1050919D2037D005BF5A2 /* Company.m */; };
 		AAA1050D19D205AD005BF5A2 /* DAO.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA1050C19D205AD005BF5A2 /* DAO.m */; };
 /* End PBXBuildFile section */
@@ -78,6 +78,8 @@
 		AA6CA28819D215EC001C4EA9 /* samsung.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = samsung.png; sourceTree = "<group>"; };
 		AA6CA29919D21EBD001C4EA9 /* ChildTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChildTableViewController.h; sourceTree = "<group>"; };
 		AA6CA29A19D21EBD001C4EA9 /* ChildTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChildTableViewController.m; sourceTree = "<group>"; };
+		AA996B4819D31BBE004CB7DE /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
+		AA996B4919D31BBE004CB7DE /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
 		AAA1048019D1D79B005BF5A2 /* NavController Core Data Version.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NavController Core Data Version.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AAA1048319D1D79B005BF5A2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AAA1048519D1D79B005BF5A2 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -101,8 +103,6 @@
 		AAA104F419D1DD39005BF5A2 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		AAA104F619D1DDD9005BF5A2 /* ParentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParentTableViewController.h; path = ../ParentTableViewController.h; sourceTree = "<group>"; };
 		AAA104F719D1DDD9005BF5A2 /* ParentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParentTableViewController.m; path = ../ParentTableViewController.m; sourceTree = "<group>"; };
-		AAA1050519D2035B005BF5A2 /* Product.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Product.h; sourceTree = "<group>"; };
-		AAA1050619D2035B005BF5A2 /* Product.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Product.m; sourceTree = "<group>"; };
 		AAA1050819D2037D005BF5A2 /* Company.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Company.h; sourceTree = "<group>"; };
 		AAA1050919D2037D005BF5A2 /* Company.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Company.m; sourceTree = "<group>"; };
 		AAA1050B19D205AD005BF5A2 /* DAO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAO.h; sourceTree = "<group>"; };
@@ -185,9 +185,9 @@
 				AAA1049519D1D79B005BF5A2 /* AppDelegate.m */,
 				AAA1050819D2037D005BF5A2 /* Company.h */,
 				AAA1050919D2037D005BF5A2 /* Company.m */,
-				AAA1050519D2035B005BF5A2 /* Product.h */,
-				AAA1050619D2035B005BF5A2 /* Product.m */,
 				AAA1049719D1D79B005BF5A2 /* NavController_Core_Data_Version.xcdatamodeld */,
+				AA996B4819D31BBE004CB7DE /* Product.h */,
+				AA996B4919D31BBE004CB7DE /* Product.m */,
 				AAA1049A19D1D79B005BF5A2 /* Images.xcassets */,
 				AAA1048C19D1D79B005BF5A2 /* Supporting Files */,
 			);
@@ -359,10 +359,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AAA1050719D2035B005BF5A2 /* Product.m in Sources */,
 				AAA1049619D1D79B005BF5A2 /* AppDelegate.m in Sources */,
 				AAA1049919D1D79B005BF5A2 /* NavController_Core_Data_Version.xcdatamodeld in Sources */,
 				AAA104F819D1DDD9005BF5A2 /* ParentTableViewController.m in Sources */,
+				AA996B4A19D31BBE004CB7DE /* Product.m in Sources */,
 				AA6CA29B19D21EBD001C4EA9 /* ChildTableViewController.m in Sources */,
 				AAA1050D19D205AD005BF5A2 /* DAO.m in Sources */,
 				AAA1049219D1D79B005BF5A2 /* main.m in Sources */,
