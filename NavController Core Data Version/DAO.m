@@ -65,35 +65,25 @@
     Product *ipad = [self TBinitProduct:@"iPad" image:@"ipad.png" url:@"https://www.apple.com/ipad/" company:@"Apple" moc:context];
     Product *ipodTouch = [self TBinitProduct:@"iPod Touch" image:@"ipod_touch.png" url:@"http://www.apple.com/ipod-touch" company:@"Apple" moc:context];
     Product *iphone = [self TBinitProduct:@"iPhone" image:@"iphone.png" url:@"http://www.apple.com/iphone" company:@"Apple" moc:context];
-
     apple.product_relationship = [NSSet setWithObjects:ipad ,ipodTouch, iphone, nil];
 
-//    Company *samsung2 = self.companies[1];
-//    //Put product objects into the products array for the company
-//    Product *s4 = [[Product alloc]initWithName:@"Galaxy S4" Image:@"galaxy_s4.png" url:@"http://www.samsung.com/global/microsite/galaxys4/" Company:@"Samsung"];
-//    Product *note = [[Product alloc]initWithName:@"Galaxy Note" Image:@"galaxy_note.jpg_256" url:@"http://www.samsung.com/global/microsite/galaxynote/note/index.html" Company:@"Samsung"];
-//    Product *tab = [[Product alloc]initWithName:@"Galaxy Tab" Image:@"galaxy_tab.jpg" url:@"http://www.samsung.com/us/mobile/galaxy-tab/" Company:@"Samsung"];
-//    samsung2.products = [[NSMutableArray alloc]
-//                         initWithObjects: s4, note, tab, nil];
-//    
-//    Company *htc3 = self.companies[2];
-//    Product *m8 = [[Product alloc]initWithName:@"HTC One M8" Image:@"htc_m8.jpg" url:@"http://www.htc.com/us/smartphones/htc-one-m8/" Company:@"HTC"];
-//    Product *remix = [[Product alloc]initWithName:@"HTC One Remix" Image:@"htc_one_remix.png" url:@"http://www.htc.com/us/smartphones/htc-one-remix/" Company:@"HTC"];
-//    Product *flyer = [[Product alloc]initWithName:@"HTC Flyer" Image:@"htc_flyer.png" url:@"http://www.amazon.com/HTC-Flyer-Android-Tablet-16/dp/B0053RJ3F8" Company:@"HTC"];
-//    htc3.products = [[NSMutableArray alloc]
-//                     initWithObjects: m8, remix, flyer, nil];
-//    
-//    
-//    Company *motorola4 = self.companies[3];
-//    Product *moto_x = [[Product alloc]initWithName:@"Moto X" Image:@"moto_x.png" url:@"https://www.motorola.com/us/motomaker?pid=FLEXR2" Company:@"Motorola"];
-//    Product *moto_g = [[Product alloc]initWithName:@"Moto G" Image:@"moto_g.jpg" url:@"http://www.motorola.com/us/moto-g-pdp-1/Moto-G-(1st-Gen.)/moto-g-pdp.html" Company:@"Motorola"];
-//    Product *moto_360 = [[Product alloc]initWithName:@"Moto 360" Image:@"moto_360.png" url:@"http://www.androidcentral.com/moto-360" Company:@"Motorola"];
-//    motorola4.products = [[NSMutableArray alloc]
-//                          initWithObjects: moto_x, moto_g, moto_360, nil];
-//    for (int i=0; i < motorola4.products.count; i++) {
-//        Product *selectedProduct = motorola4.products[i];
-//        selectedProduct.company = motorola.name;
-//    }
+    
+    Product *s4 = [self TBinitProduct:@"Galaxy S4" image:@"galaxy_s4.png" url:@"http://www.samsung.com/global/microsite/galaxys4/" company:@"Samsung" moc:context];
+    Product *note = [self TBinitProduct:@"Galaxy Note" image:@"galaxy_note.jpg_256" url:@"http://www.samsung.com/global/microsite/galaxynote/note/index.html?type=find" company:@"Samsung" moc:context];
+    Product *tab = [self TBinitProduct:@"Galaxy Tab" image:@"galaxy_tab.jpg" url:@"http://www.samsung.com/us/mobile/galaxy-tab/" company:@"Samsung" moc:context];
+    samsung.product_relationship = [NSSet setWithObjects:s4, note, tab, nil];
+
+    Product *m8 = [self TBinitProduct:@"HTC One M8" image:@"htc_m8.jpg" url:@"http://www.htc.com/us/smartphones/htc-one-m8/" company:@"HTC" moc:context];
+    Product *remix = [self TBinitProduct:@"HTC One Remix" image:@"htc_one_remix.png" url:@"http://www.htc.com/us/smartphones/htc-one-remix/" company:@"HTC" moc:context];
+    Product *flyer = [self TBinitProduct:@"HTC Flyer" image:@"htc_flyer.png" url:@"http://www.amazon.com/HTC-Flyer-Android-Tablet-16/dp/B0053RJ3F8" company:@"HTC" moc:context];
+    htc.product_relationship = [NSSet setWithObjects: m8, remix, flyer, nil];
+
+
+    Product *moto_x = [self TBinitProduct:@"Moto X" image:@"moto_x.png" url:@"https://www.motorola.com/us/motomaker?pid=FLEXR2" company:@"Motorola" moc:context];
+    Product *moto_g = [self TBinitProduct:@"Moto G" image:@"moto_g.jpg" url:@"http://www.motorola.com/us/moto-g-pdp-1/Moto-G-(1st-Gen.)/moto-g-pdp.html" company:@"Motorola" moc:context];
+    Product *moto_360 = [self TBinitProduct:@"Moto 360" image:@"moto_360.png" url:@"http://www.androidcentral.com/moto-360" company:@"Motorola" moc:context];
+    motorola.product_relationship = [NSSet setWithObjects:moto_x, moto_g, moto_360, nil];
+
     
     return self;
 }
