@@ -17,4 +17,7 @@
 
 @property (strong, nonatomic) IBOutlet UIWebView *myWebView;
 
+@property BOOL connectionLost;
+
+
 @end

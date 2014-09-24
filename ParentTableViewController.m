@@ -56,6 +56,7 @@
         self.dao.companies = [[NSMutableArray alloc]init];
         
         
+        //this logic ensures that the unordered NSSET gets ordered in the ParentTableViewController as soon as it gets loaded
         for (int i=0; i < fetchedArray.count; i++) {
             Company *selectedCompany = fetchedArray[i];
             if ([selectedCompany.name isEqual: @"Apple"]) {
