@@ -2,7 +2,7 @@
 //  Company.h
 //  NavController Core Data Version
 //
-//  Created by Aditya Narayan on 9/23/14.
+//  Created by Aditya Narayan on 9/24/14.
 //  Copyright (c) 2014 NM. All rights reserved.
 //
 
@@ -18,15 +18,13 @@
 @property (nonatomic, retain) NSNumber * stockPrice;
 @property (nonatomic, retain) NSString * stockSymbol;
 @property (nonatomic, retain) NSSet *product_relationship;
-            
-
 @end
 
 @interface Company (CoreDataGeneratedAccessors)
 
-- (void)addProductObject:(Product *)value;
-- (void)removeProductObject:(Product *)value;
-- (void)addProduct:(NSSet *)values;
-- (void)removeProduct:(NSSet *)values;
+- (void)addProduct_relationshipObject:(Product *)value;
+- (void)removeProduct_relationshipObject:(Product *)value;
+- (void)addProduct_relationship:(NSSet *)values;
+- (void)removeProduct_relationship:(NSSet *)values;
 
 @end

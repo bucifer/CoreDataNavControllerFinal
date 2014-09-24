@@ -61,7 +61,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+
+#pragma mark - TableView Delegates
 
 //This method just puts a little title at left-top of the tableview, weird useless
 //- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -129,19 +130,25 @@
 }
 */
 
-/*
-// Override to support editing the table view.
+
+//DELETE DELEGATE
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
+        // Delete the row from the data source and then from the TableView
+        NSArray *productsArray = [self.selectedCompany.product_relationship allObjects];
+        NSNumber *indexNum = [NSNumber numberWithInteger:indexPath.row];
+        
+        for (int i=0; i < productsArray.count; i++) {
+            Product* selectedProduct = productsArray[i];
+            if ([selectedProduct.order_id isEqualToNumber:indexNum]) {
+                [self.selectedCompany removeProduct_relationshipObject:selectedProduct];
+            }
+        }
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
-*/
+
 
 /*
 // Override to support rearranging the table view.

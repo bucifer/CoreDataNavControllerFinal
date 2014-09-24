@@ -2,7 +2,7 @@
 //  Company.m
 //  NavController Core Data Version
 //
-//  Created by Aditya Narayan on 9/23/14.
+//  Created by Aditya Narayan on 9/24/14.
 //  Copyright (c) 2014 NM. All rights reserved.
 //
 
@@ -17,7 +17,5 @@
 @dynamic stockPrice;
 @dynamic stockSymbol;
 @dynamic product_relationship;
-
-
 
 @end
