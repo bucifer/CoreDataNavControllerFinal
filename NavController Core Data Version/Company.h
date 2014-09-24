@@ -17,8 +17,8 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * stockPrice;
 @property (nonatomic, retain) NSString * stockSymbol;
-@property (nonatomic, retain) NSSet *product;
-
+@property (nonatomic, retain) NSSet *product_relationship;
+            
 
 @end
 

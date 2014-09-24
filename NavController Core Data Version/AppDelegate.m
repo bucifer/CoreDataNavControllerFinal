@@ -18,19 +18,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Initialize Reachability
-    Reachability *reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
-    
-    reachability.reachableBlock = ^(Reachability *reachability) {
-//                NSLog(@"From: App Delegate.m: Network is reachable.");
-    };
-    
-    reachability.unreachableBlock = ^(Reachability *reachability) {
-//               NSLog(@"From: App Delegate.m: Network is unreachable.");
-    };
-    
-    // Start Monitoring
-    [reachability startNotifier];
     
     return YES;
 }

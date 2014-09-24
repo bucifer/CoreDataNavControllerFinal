@@ -27,7 +27,8 @@
 - (Company*) TBinitCompany: (NSString *)put_name image:(NSString*)put_image stockSymbol:(NSString *)put_symbol moc:(NSManagedObjectContext*) context{
     
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Company" inManagedObjectContext:context];
-    Company *company = [[Company alloc] initWithEntity:entity insertIntoManagedObjectContext:nil];
+    Company *company = [[Company alloc] initWithEntity:entity insertIntoManagedObjectContext:nil]; //this nil context means this is just a pointer and not getting saved into context
+    //http://stackoverflow.com/questions/8139033/use-nsmanagedobject-class-without-initwithentity for more info
     
     company.name = put_name;
     company.image = put_image;
@@ -61,20 +62,12 @@
     self.companies = [[NSMutableArray alloc] initWithObjects:
                       apple, samsung, htc, motorola, nil];
     
-    Company *select = self.companies[0];
-    NSLog(@"%@", select.name);
-//
-//    Company *apple1 = self.companies[0];
-//    //Put product objects into the products array for the company
-    
     Product *ipad = [self TBinitProduct:@"iPad" image:@"ipad.png" url:@"https://www.apple.com/ipad/" company:@"Apple" moc:context];
     Product *ipodTouch = [self TBinitProduct:@"iPod Touch" image:@"ipod_touch.png" url:@"http://www.apple.com/ipod-touch" company:@"Apple" moc:context];
-    Product *iPhone = [self TBinitProduct:@"iPhone" image:@"iphone.png" url:@"http://www.apple.com/iphone" company:@"Apple" moc:context];
+    Product *iphone = [self TBinitProduct:@"iPhone" image:@"iphone.png" url:@"http://www.apple.com/iphone" company:@"Apple" moc:context];
 
-//    apple1.products = [[NSMutableArray alloc]
-//                       initWithObjects:
-//                       ipad, ipod_touch, iphone, nil];
-//    
+    apple.product_relationship = [NSSet setWithObjects:ipad ,ipodTouch, iphone, nil];
+
 //    Company *samsung2 = self.companies[1];
 //    //Put product objects into the products array for the company
 //    Product *s4 = [[Product alloc]initWithName:@"Galaxy S4" Image:@"galaxy_s4.png" url:@"http://www.samsung.com/global/microsite/galaxys4/" Company:@"Samsung"];

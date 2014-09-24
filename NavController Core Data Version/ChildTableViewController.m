@@ -14,6 +14,8 @@
 
 @implementation ChildTableViewController
 
+
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -59,7 +61,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 1;
+    return self.selectedCompany.product_relationship.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -69,8 +71,14 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    
     // Configure the cell...
+    
+    if (!self.selectedCompany.product_relationship.count == 0) {
+        Product *product = [[self.selectedCompany.product_relationship allObjects] objectAtIndex:indexPath.row];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", product.name];
+        [[cell imageView] setImage: [UIImage imageNamed: product.image]];
+    }
+
     
     return cell;
 }

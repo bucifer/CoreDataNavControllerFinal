@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Company.h"
+#import "Product.h"
 
 @interface ChildTableViewController : UITableViewController <UITableViewDataSource>
 

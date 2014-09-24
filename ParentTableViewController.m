@@ -75,7 +75,6 @@
     
 }
 
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     ChildTableViewController *childVC = [segue destinationViewController];
     if([segue.identifier isEqualToString:@"childViewSegue"]) {
@@ -91,7 +90,10 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
+
+
+
+#pragma mark - Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -130,11 +132,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    Company * selectedCompany =
-//    selectedCompany = [self.dao.companies objectAtIndex:indexPath.row];
-//    self.childVC.title = selectedCompany.name;
-//    self.childVC.company = selectedCompany;
-//    self.childVC.dao = self.dao;
     
     self.selectedCompany = [self.dao.companies objectAtIndex:indexPath.row];
     [self performSegueWithIdentifier:@"childViewSegue" sender:self];
