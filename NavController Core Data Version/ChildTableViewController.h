@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "Company.h"
 #import "Product.h"
+#import "DAO.h"
 
 @interface ChildTableViewController : UITableViewController <UITableViewDataSource>
 
@@ -17,5 +18,7 @@
 
 @property (nonatomic) NSMutableArray *products;
 @property (nonatomic) NSMutableArray *productsArrayForAppropriateCompany;
+
+@property (nonatomic) DAO *dao;
 
 @end

@@ -119,12 +119,18 @@
 */
 
 
-//DELETE DELEGATE
+//DELETE DELEGATE - everytime you delete something this state should get saved?
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source and then from the TableView
+        // Delete the row from Core Data first
+        Product *productToBeDeleted = [self.productsArrayForAppropriateCompany objectAtIndex:indexPath.row];
+        [self.dao deleteProduct:productToBeDeleted];
+        
+        //Deleting from memory array second
         [self.productsArrayForAppropriateCompany removeObjectAtIndex:indexPath.row];
+
+        //Deleting from table view third
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     }
 }

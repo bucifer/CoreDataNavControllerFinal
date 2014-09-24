@@ -42,8 +42,32 @@
     
     self.title = @"Mobile device makers";
     self.dao = [[DAO alloc]init];
+
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    if([userDefaults boolForKey:@"notFirstLaunch"] == false)
+    {
+        //do stuff on first launch.
+        NSLog(@"this is first time you are running the app");
+        //The first time you run the app, Save Context in Core Data right after data gets initialized
+//        [self.dao saveChanges];
+
+        //after doing stuff on first launch, you set this key so that consequent times, this block never gets run
+        [userDefaults setBool:YES forKey:@"notFirstLaunch"];
+        [userDefaults synchronize];
+    } else {
+        //if it's not the first time you are running the app, you fetch from Core Data and sent your stuff equal to it;
+        NSManagedObjectContext *context = [self managedObjectContext];
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription
+                                          entityForName:@"Company" inManagedObjectContext:context];
+           [fetchRequest setEntity:entity];
+        NSError *error;
+        NSArray *fetchedCompanies = [context executeFetchRequest:fetchRequest error:&error];
+        NSLog(@"not the first time you are running the app");
+    }
     
     
+    //For Reachability check
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reachabilityChanged:)
                                                  name:kReachabilityChangedNotification
@@ -68,6 +92,7 @@
     NSURLConnection *connect = [[NSURLConnection alloc] initWithRequest: request delegate: self];
     
     [super viewWillAppear:animated];
+    
     [self.tableView reloadData];
     
 }
@@ -78,6 +103,7 @@
         childVC.title = [self.selectedCompany valueForKey:@"name"];
         childVC.selectedCompany = self.selectedCompany;
         childVC.products = self.dao.products;
+        childVC.dao = self.dao;
         
         NSMutableArray* productsArrayForAppropriateCompany = [[NSMutableArray alloc]init];
         
