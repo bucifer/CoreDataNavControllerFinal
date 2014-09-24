@@ -24,4 +24,12 @@
 
 @property Company *selectedCompany;
 
+@property BOOL connectionLost;
+
+- (BOOL)connected;
+- (void)reachabilityDidChange:(NSNotification *)notification;
+
+
+
+
 @end

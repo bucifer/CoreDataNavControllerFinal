@@ -29,6 +29,12 @@
 {
     [super viewDidLoad];
     
+    
+    // Add Observer for Reachability
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reachabilityDidChange:) name:kReachabilityChangedNotification object:nil];
+    
+    
+    
     self.title = @"Mobile device makers";
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -46,7 +52,41 @@
         //if it's not the first time you are running the app, you fetch from Core Data and sent your stuff equal to it;
         self.dao = [[DAO alloc]init];
         
-        self.dao.companies = [self.dao requestCDAndFetch:@"Company"];
+        NSMutableArray *fetchedArray = [self.dao requestCDAndFetch:@"Company"];
+        self.dao.companies = [[NSMutableArray alloc]init];
+        
+        
+        for (int i=0; i < fetchedArray.count; i++) {
+            Company *selectedCompany = fetchedArray[i];
+            if ([selectedCompany.name isEqual: @"Apple"]) {
+                [self.dao.companies addObject:selectedCompany];
+                break;
+            }
+        }
+        for (int i=0; i < fetchedArray.count; i++) {
+            Company *selectedCompany = fetchedArray[i];
+            if ([selectedCompany.name isEqual: @"Samsung"]) {
+                [self.dao.companies addObject:selectedCompany];
+                break;
+            }
+        }
+        for (int i=0; i < fetchedArray.count; i++) {
+            Company *selectedCompany = fetchedArray[i];
+            if ([selectedCompany.name isEqual: @"HTC"]) {
+                [self.dao.companies addObject:selectedCompany];
+                break;
+            }
+        }
+        for (int i=0; i < fetchedArray.count; i++) {
+            Company *selectedCompany = fetchedArray[i];
+            if ([selectedCompany.name isEqual: @"Motorola"]) {
+                [self.dao.companies addObject:selectedCompany];
+                break;
+            }
+        }
+        
+        
+        
         self.dao.products = [self.dao requestCDAndFetch:@"Product"];
         
         NSLog(@"not the first time you are running the app");
@@ -59,7 +99,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     //viewWillAppear is 1) first time you see view or 2) when you leave the page and come back to it later
-        
+    
+    
     //making URL Request;
     NSURL *everything_url = [NSURL URLWithString:@"http://download.finance.yahoo.com/d/quotes.csv?s=%40%5EDJI,AAPL,SSNLF,htcxf,MSI&f=sl1&e=.csv"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:everything_url];
@@ -124,21 +165,19 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
-    // Configure the cell...
     
-    if (!self.dao.companies.count == 0) {
+    // Configure the cell...
         Company * selectedCompany = [self.dao.companies objectAtIndex:indexPath.row];
         cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", selectedCompany.name, selectedCompany.stockPrice];
         [[cell imageView] setImage: [UIImage imageNamed: selectedCompany.image]];
         
-//        if ([self connected]) {
-//            cell.textLabel.backgroundColor = [UIColor whiteColor];
-//        } else {
-//            cell.textLabel.text = [NSString stringWithFormat:@"%@ %@ (stock price outdated due to loss of internet connection)", selectedCompany.name, selectedCompany.stockPrice];
-//            cell.textLabel.backgroundColor = [UIColor redColor];
-//        }
-    }
-
+        if (self.connectionLost != YES){
+            cell.textLabel.backgroundColor = [UIColor whiteColor];
+        } else {
+            cell.textLabel.text = [NSString stringWithFormat:@"%@ %@ (stock price outdated due to loss of internet connection)", selectedCompany.name, selectedCompany.stockPrice];
+            cell.textLabel.backgroundColor = [UIColor redColor];
+        }
+    
     return cell;
 }
 
@@ -206,6 +245,29 @@
 
 #pragma mark Reachability methods
 
+- (void)reachabilityDidChange:(NSNotification *)notification {
+    Reachability *reachability = (Reachability *)[notification object];
+    
+    if ([reachability isReachable]) {
+        NSLog(@"Reachable");
+        self.connectionLost = NO;
+    } else if (![reachability isReachable]) {
+        NSLog(@"Unreachable");
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Network Connection Alert" message:@"Network Connection Off or Unreachable" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
+        [alert show];
+        
+        self.connectionLost = YES;
+        
+        [self.tableView reloadData];
+    }
+}
+
+
+- (BOOL)connected {
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
 
 
 #pragma mark NSURLConnection Delegate Methods

@@ -18,6 +18,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Initialize Reachability
+    Reachability *reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
+    
+    reachability.reachableBlock = ^(Reachability *reachability) {
+    };
+    
+    reachability.unreachableBlock = ^(Reachability *reachability) {
+    };
+    
+    // Start Monitoring
+    [reachability startNotifier];
     
     return YES;
 }
