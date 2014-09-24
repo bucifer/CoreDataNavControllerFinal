@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Product.h"
+#import "Reachability.h"
 
 @interface ThirdViewController : UIViewController
 

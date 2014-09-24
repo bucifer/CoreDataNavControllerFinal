@@ -15,16 +15,6 @@
 
 @implementation ChildTableViewController
 
-//we need this to retrieve managed object context and later save data (for both Controllers)
-- (NSManagedObjectContext *) managedObjectContext {
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication]delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
-}
-
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];

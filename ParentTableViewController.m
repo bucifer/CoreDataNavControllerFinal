@@ -15,17 +15,6 @@
 
 @implementation ParentTableViewController
 
-//we need this to retrieve managed object context and later save data (for both Controllers)
-//CRUCIAL TO remember to set this delegate below!!! 
-- (NSManagedObjectContext *) managedObjectContext {
-    NSManagedObjectContext *context = nil;
-    id delegate = [[UIApplication sharedApplication]delegate];
-    if ([delegate performSelector:@selector(managedObjectContext)]) {
-        context = [delegate managedObjectContext];
-    }
-    return context;
-}
-
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -41,47 +30,36 @@
     [super viewDidLoad];
     
     self.title = @"Mobile device makers";
-    self.dao = [[DAO alloc]init];
 
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     if([userDefaults boolForKey:@"notFirstLaunch"] == false)
     {
         //do stuff on first launch.
         NSLog(@"this is first time you are running the app");
-        //The first time you run the app, Save Context in Core Data right after data gets initialized
-//        [self.dao saveChanges];
+        self.dao = [[DAO alloc] initFirstTime];
 
         //after doing stuff on first launch, you set this key so that consequent times, this block never gets run
         [userDefaults setBool:YES forKey:@"notFirstLaunch"];
         [userDefaults synchronize];
+        
     } else {
         //if it's not the first time you are running the app, you fetch from Core Data and sent your stuff equal to it;
-        NSManagedObjectContext *context = [self managedObjectContext];
-        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-        NSEntityDescription *entity = [NSEntityDescription
-                                          entityForName:@"Company" inManagedObjectContext:context];
-           [fetchRequest setEntity:entity];
-        NSError *error;
-        NSArray *fetchedCompanies = [context executeFetchRequest:fetchRequest error:&error];
+        self.dao = [[DAO alloc]init];
+        
+        self.dao.companies = [self.dao requestCDAndFetch:@"Company"];
+        self.dao.products = [self.dao requestCDAndFetch:@"Product"];
+        
         NSLog(@"not the first time you are running the app");
     }
-    
-    
-    //For Reachability check
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reachabilityChanged:)
-                                                 name:kReachabilityChangedNotification
-                                               object:nil];
-    Reachability * reach = [Reachability reachabilityWithHostname:@"www.google.com"];
-    [reach startNotifier];
     
     [self.tableView reloadData];
     
 }
 
+
 - (void)viewWillAppear:(BOOL)animated {
     //viewWillAppear is 1) first time you see view or 2) when you leave the page and come back to it later
-    
+        
     //making URL Request;
     NSURL *everything_url = [NSURL URLWithString:@"http://download.finance.yahoo.com/d/quotes.csv?s=%40%5EDJI,AAPL,SSNLF,htcxf,MSI&f=sl1&e=.csv"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:everything_url];
@@ -153,12 +131,12 @@
         cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", selectedCompany.name, selectedCompany.stockPrice];
         [[cell imageView] setImage: [UIImage imageNamed: selectedCompany.image]];
         
-        if ([self connected]) {
-            cell.textLabel.backgroundColor = [UIColor whiteColor];
-        } else {
-            cell.textLabel.text = [NSString stringWithFormat:@"%@ %@ (stock price outdated due to loss of internet connection)", selectedCompany.name, selectedCompany.stockPrice];
-            cell.textLabel.backgroundColor = [UIColor redColor];
-        }
+//        if ([self connected]) {
+//            cell.textLabel.backgroundColor = [UIColor whiteColor];
+//        } else {
+//            cell.textLabel.text = [NSString stringWithFormat:@"%@ %@ (stock price outdated due to loss of internet connection)", selectedCompany.name, selectedCompany.stockPrice];
+//            cell.textLabel.backgroundColor = [UIColor redColor];
+//        }
     }
 
     return cell;
@@ -227,25 +205,8 @@
 
 
 #pragma mark Reachability methods
-- (BOOL)connected {
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
-    return networkStatus != NotReachable;
-}
 
 
--(void)reachabilityChanged:(NSNotification*)note
-{
-    Reachability * reach = [note object];
-    if([reach isReachable]) {
-       NSLog(@"Internet is Reachable");
-       }
-    else {
-       NSLog(@"Internet Connection UNReachable");
-       UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Network Connection Alert" message:@"Network Connection Off or Unreachable" delegate:self cancelButtonTitle:@"Close" otherButtonTitles:nil];
-       [alert show];
-    }
-}
 
 #pragma mark NSURLConnection Delegate Methods
 //pragma marks make it easy to use Xcode jump bar to jump to different sections of your code, just a way of labeling your code so you can find it easier later

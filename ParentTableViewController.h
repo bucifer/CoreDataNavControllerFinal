@@ -14,14 +14,14 @@
 @class ChildTableViewController;
 @class Reachability;
 
-@interface ParentTableViewController :UITableViewController;
+@interface ParentTableViewController :UITableViewController {
+    Reachability *internetReachableFoo;
+}
 
 @property (strong) DAO *dao;
 
 @property (strong, nonatomic) IBOutlet UITableViewCell *parentViewCell;
 
 @property Company *selectedCompany;
-
-- (BOOL)connected;
 
 @end

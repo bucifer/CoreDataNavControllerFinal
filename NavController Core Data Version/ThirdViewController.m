@@ -27,12 +27,23 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    //For Reachability check
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+    Reachability * reach = [Reachability reachabilityWithHostname:@"www.google.com"];
+    [reach startNotifier];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [self.myWebView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.selectedProduct.url] ] ];
 }
+
+
+
 
 - (void)didReceiveMemoryWarning
 {

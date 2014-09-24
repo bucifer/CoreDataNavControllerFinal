@@ -24,36 +24,9 @@
     return context;
 }
 
-- (Company*) TBinitCompany: (NSString *)put_name image:(NSString*)put_image stockSymbol:(NSString *)put_symbol moc:(NSManagedObjectContext*) context{
-    
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Company" inManagedObjectContext:context];
-    Company *company = [[Company alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-    //if the insertIntoManagedObjectContext argument is nil, means this is just a pointer and not getting saved into context
-    //http://stackoverflow.com/questions/8139033/use-nsmanagedobject-class-without-initwithentity for more info
-    
-    company.name = put_name;
-    company.image = put_image;
-    company.stockSymbol = put_symbol;
-    
-    return company;
-}
-
-- (Product*) TBinitProduct: (NSString *)put_name image:(NSString*)put_image url:(NSString *)put_url company:(NSString *)put_company moc:(NSManagedObjectContext*) context orderID:(NSNumber *)put_order_id{
-    
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Product" inManagedObjectContext:context];
-    Product *product = [[Product alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
-    
-    product.name = put_name;
-    product.image = put_image;
-    product.url = put_url;
-    product.company = put_company;
-    product.order_id = put_order_id;
-    
-    return product;
-}
 
 
-- (id)init {
+- (id)initFirstTime {
     NSManagedObjectContext *context = [self managedObjectContext];
     
     Company *apple = [self TBinitCompany:@"Apple" image:@"apple.png" stockSymbol:@"AAPL" moc:context];
@@ -83,13 +56,53 @@
     
     self.products = [[NSMutableArray alloc] initWithObjects:
                      ipad, ipodTouch, iphone, s4, note, tab, m8, remix, flyer, moto_x, moto_g, moto_360, nil];
-    
-    
+
     [self saveChanges];
     
     
     return self;
 }
+
+- (Company*) TBinitCompany: (NSString *)put_name image:(NSString*)put_image stockSymbol:(NSString *)put_symbol moc:(NSManagedObjectContext*) context{
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Company" inManagedObjectContext:context];
+    Company *company = [[Company alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    //if the insertIntoManagedObjectContext argument is nil, means this is just a pointer and not getting saved into context
+    //http://stackoverflow.com/questions/8139033/use-nsmanagedobject-class-without-initwithentity for more info
+    
+    company.name = put_name;
+    company.image = put_image;
+    company.stockSymbol = put_symbol;
+    
+    return company;
+}
+
+- (Product*) TBinitProduct: (NSString *)put_name image:(NSString*)put_image url:(NSString *)put_url company:(NSString *)put_company moc:(NSManagedObjectContext*) context orderID:(NSNumber *)put_order_id{
+    
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Product" inManagedObjectContext:context];
+    Product *product = [[Product alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+    
+    product.name = put_name;
+    product.image = put_image;
+    product.url = put_url;
+    product.company = put_company;
+    product.order_id = put_order_id;
+    
+    return product;
+}
+
+
+
+- (NSMutableArray *) requestCDAndFetch: (NSString *) entityName {
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription
+                                   entityForName:entityName inManagedObjectContext:[self managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    NSError *error;
+    NSArray *fetchedProducts = [[self managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    return [fetchedProducts mutableCopy];
+}
+
 
 - (void) deleteProduct: (Product*) product {
     NSLog(@"deleteProduct method called from childviewcontroller");
@@ -98,7 +111,7 @@
     [self.products removeObject:product];
     
     //Then we delete from our Core Data
-    [managedObjectContext deleteObject:product];
+    [self.managedObjectContext deleteObject:product];
     
     [self saveChanges];
     NSLog(@"Product %@ Delete successful", product.name);
@@ -108,7 +121,7 @@
 -(void) saveChanges
 {
     NSError *err = nil;
-    BOOL successful = [managedObjectContext save:&err];
+    BOOL successful = [self.managedObjectContext save:&err];
     if(!successful){
         NSLog(@"Error saving: %@", [err localizedDescription]);
     } else {
