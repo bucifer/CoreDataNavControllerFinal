@@ -73,13 +73,17 @@
     }
     // Configure the cell...
     
-    if (!self.selectedCompany.product_relationship.count == 0) {
-        Product *product = [[self.selectedCompany.product_relationship allObjects] objectAtIndex:indexPath.row];
-        cell.textLabel.text = [NSString stringWithFormat:@"%@", product.name];
-        [[cell imageView] setImage: [UIImage imageNamed: product.image]];
+    if (self.selectedCompany.product_relationship.count != 0) {
+        NSArray *productsArray = [self.selectedCompany.product_relationship allObjects];
+        for (int i=0; i < productsArray.count; i++) {
+            Product* selectedProduct = productsArray[i];
+            NSNumber *myNum = [NSNumber numberWithInteger:indexPath.row];
+            if ([selectedProduct.order_id isEqualToNumber:myNum]) {
+                cell.textLabel.text = [NSString stringWithFormat:@"%@", selectedProduct.name];
+                [[cell imageView] setImage: [UIImage imageNamed: selectedProduct.image]];
+            }
+        }
     }
-
-    
     return cell;
 }
 
