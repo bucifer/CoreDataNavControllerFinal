@@ -15,4 +15,7 @@
 @property (nonatomic) Company *selectedCompany;
 @property (nonatomic) Product *selectedProduct;
 
+@property (nonatomic) NSMutableArray *products;
+@property (nonatomic) NSMutableArray *productsArrayForAppropriateCompany;
+
 @end

@@ -43,8 +43,10 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    
-    
+}
+
+- (void)viewDidAppear {
+
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -79,7 +81,16 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return self.selectedCompany.product_relationship.count;
+    self.productsArrayForAppropriateCompany = [[NSMutableArray alloc]init];
+    
+    for (int i=0; i < self.products.count; i++) {
+        Product* selectedProduct = self.products[i];
+        if ([selectedProduct.company isEqualToString:self.selectedCompany.name]) {
+            [self.productsArrayForAppropriateCompany addObject:selectedProduct];
+        }
+    }
+    
+    return self.productsArrayForAppropriateCompany.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -91,33 +102,21 @@
     }
     // Configure the cell...
     
-    if (self.selectedCompany.product_relationship.count != 0) {
-        NSArray *productsArray = [self.selectedCompany.product_relationship allObjects];
-        for (int i=0; i < productsArray.count; i++) {
-            Product* selectedProduct = productsArray[i];
-            NSNumber *myNum = [NSNumber numberWithInteger:indexPath.row];
-            if ([selectedProduct.order_id isEqualToNumber:myNum]) {
-                cell.textLabel.text = [NSString stringWithFormat:@"%@", selectedProduct.name];
-                [[cell imageView] setImage: [UIImage imageNamed: selectedProduct.image]];
-            }
-        }
+    if (self.productsArrayForAppropriateCompany.count != 0) {
+        Product *selectedProduct = [self.productsArrayForAppropriateCompany objectAtIndex:indexPath.row];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", selectedProduct.name];
+        [[cell imageView] setImage: [UIImage imageNamed: selectedProduct.image]];
     }
+
     return cell;
 }
 
-//IMPORTANT - this is the DELEGATE happens when you press on the row
+//IMPORTANT - this is the DELEGATE happens when you SELECT/PRESS on the row
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *productsArray = [self.selectedCompany.product_relationship allObjects];
-    NSNumber *indexNum = [NSNumber numberWithInteger:indexPath.row];
     
-    for (int i=0; i < productsArray.count; i++) {
-        Product* selectedProduct = productsArray[i];
-        if ([selectedProduct.order_id isEqualToNumber:indexNum]) {
-            self.selectedProduct = selectedProduct;
-        }
-    }
-
+    self.selectedProduct = [self.productsArrayForAppropriateCompany objectAtIndex:indexPath.row];
+    
     [self performSegueWithIdentifier:@"thirdViewSegue" sender:self];
 }
 
@@ -132,22 +131,22 @@
 
 
 //DELETE DELEGATE
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source and then from the TableView
-        NSArray *productsArray = [self.selectedCompany.product_relationship allObjects];
-        NSNumber *indexNum = [NSNumber numberWithInteger:indexPath.row];
-        
-        for (int i=0; i < productsArray.count; i++) {
-            Product* selectedProduct = productsArray[i];
-            if ([selectedProduct.order_id isEqualToNumber:indexNum]) {
-                [self.selectedCompany removeProduct_relationshipObject:selectedProduct];
-            }
-        }
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
-}
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (editingStyle == UITableViewCellEditingStyleDelete) {
+//        // Delete the row from the data source and then from the TableView
+//        NSArray *productsArray = [self.selectedCompany.product_relationship allObjects];
+//        NSNumber *indexNum = [NSNumber numberWithInteger:indexPath.row];
+//        
+//        for (int i=0; i < productsArray.count; i++) {
+//            Product* selectedProduct = productsArray[i];
+//            if ([selectedProduct.order_id isEqualToNumber:indexNum]) {
+//                [self.selectedCompany removeProduct_relationshipObject:selectedProduct];
+//            }
+//        }
+//        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//    }
+//}
 
 
 /*

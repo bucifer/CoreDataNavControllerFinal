@@ -66,24 +66,22 @@
     Product *ipad = [self TBinitProduct:@"iPad" image:@"ipad.png" url:@"https://www.apple.com/ipad/" company:@"Apple" moc:context orderID:@0];
     Product *ipodTouch = [self TBinitProduct:@"iPod Touch" image:@"ipod_touch.png" url:@"http://www.apple.com/ipod-touch" company:@"Apple" moc:context orderID:@1];
     Product *iphone = [self TBinitProduct:@"iPhone" image:@"iphone.png" url:@"http://www.apple.com/iphone" company:@"Apple" moc:context orderID:@2];
-    apple.product_relationship = [NSSet setWithObjects:ipad ,ipodTouch, iphone, nil];
-
     
     Product *s4 = [self TBinitProduct:@"Galaxy S4" image:@"galaxy_s4.png" url:@"http://www.samsung.com/global/microsite/galaxys4/" company:@"Samsung" moc:context orderID:@0];
     Product *note = [self TBinitProduct:@"Galaxy Note" image:@"galaxy_note.jpg_256" url:@"http://www.samsung.com/global/microsite/galaxynote/note/index.html?type=find" company:@"Samsung" moc:context orderID:@1];
     Product *tab = [self TBinitProduct:@"Galaxy Tab" image:@"galaxy_tab.jpg" url:@"http://www.samsung.com/us/mobile/galaxy-tab/" company:@"Samsung" moc:context orderID:@2];
-    samsung.product_relationship = [NSSet setWithObjects:s4, note, tab, nil];
 
     Product *m8 = [self TBinitProduct:@"HTC One M8" image:@"htc_m8.jpg" url:@"http://www.htc.com/us/smartphones/htc-one-m8/" company:@"HTC" moc:context orderID:@0];
     Product *remix = [self TBinitProduct:@"HTC One Remix" image:@"htc_one_remix.png" url:@"http://www.htc.com/us/smartphones/htc-one-remix/" company:@"HTC" moc:context orderID:@1];
     Product *flyer = [self TBinitProduct:@"HTC Flyer" image:@"htc_flyer.png" url:@"http://www.amazon.com/HTC-Flyer-Android-Tablet-16/dp/B0053RJ3F8" company:@"HTC" moc:context orderID:@2];
-    htc.product_relationship = [NSSet setWithObjects: m8, remix, flyer, nil];
 
 
     Product *moto_x = [self TBinitProduct:@"Moto X" image:@"moto_x.png" url:@"https://www.motorola.com/us/motomaker?pid=FLEXR2" company:@"Motorola" moc:context orderID:@0];
     Product *moto_g = [self TBinitProduct:@"Moto G" image:@"moto_g.jpg" url:@"http://www.motorola.com/us/moto-g-pdp-1/Moto-G-(1st-Gen.)/moto-g-pdp.html" company:@"Motorola" moc:context orderID:@1];
     Product *moto_360 = [self TBinitProduct:@"Moto 360" image:@"moto_360.png" url:@"http://www.androidcentral.com/moto-360" company:@"Motorola" moc:context orderID:@2];
-    motorola.product_relationship = [NSSet setWithObjects:moto_x, moto_g, moto_360, nil];
+    
+    self.products = [[NSMutableArray alloc] initWithObjects:
+                     ipad, ipodTouch, iphone, s4, note, tab, m8, remix, flyer, moto_x, moto_g, moto_360, nil];
 
     
     return self;

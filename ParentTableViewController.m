@@ -27,9 +27,6 @@
 }
 
 
-
-
-
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -44,15 +41,13 @@
     [super viewDidLoad];
     
     self.title = @"Mobile device makers";
-//    self.titleLabel.text = self.title;
-    
     self.dao = [[DAO alloc]init];
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reachabilityChanged:)
                                                  name:kReachabilityChangedNotification
                                                object:nil];
-    
     Reachability * reach = [Reachability reachabilityWithHostname:@"www.google.com"];
     [reach startNotifier];
     
@@ -62,6 +57,8 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     //viewWillAppear is 1) first time you see view or 2) when you leave the page and come back to it later
+    
+    //making URL Request;
     NSURL *everything_url = [NSURL URLWithString:@"http://download.finance.yahoo.com/d/quotes.csv?s=%40%5EDJI,AAPL,SSNLF,htcxf,MSI&f=sl1&e=.csv"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:everything_url];
     //specify that it is a GET request
@@ -78,8 +75,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     ChildTableViewController *childVC = [segue destinationViewController];
     if([segue.identifier isEqualToString:@"childViewSegue"]) {
-        childVC.selectedCompany = self.selectedCompany;
         childVC.title = [self.selectedCompany valueForKey:@"name"];
+        childVC.selectedCompany = self.selectedCompany;
+        childVC.products = self.dao.products;
     }
 }
 
