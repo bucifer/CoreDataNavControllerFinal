@@ -78,7 +78,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     ChildTableViewController *childVC = [segue destinationViewController];
     if([segue.identifier isEqualToString:@"childViewSegue"]) {
-
         childVC.selectedCompany = self.selectedCompany;
         childVC.title = [self.selectedCompany valueForKey:@"name"];
     }
@@ -130,6 +129,7 @@
     return cell;
 }
 
+//IMPORTANT - this is the DELEGATE happens when you press on the row
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     

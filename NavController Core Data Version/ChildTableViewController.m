@@ -7,6 +7,7 @@
 //
 
 #import "ChildTableViewController.h"
+#import "ThirdViewController.h"
 
 @interface ChildTableViewController ()
 
@@ -14,7 +15,15 @@
 
 @implementation ChildTableViewController
 
-
+//we need this to retrieve managed object context and later save data (for both Controllers)
+- (NSManagedObjectContext *) managedObjectContext {
+    NSManagedObjectContext *context = nil;
+    id delegate = [[UIApplication sharedApplication]delegate];
+    if ([delegate performSelector:@selector(managedObjectContext)]) {
+        context = [delegate managedObjectContext];
+    }
+    return context;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -36,6 +45,14 @@
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    ThirdViewController *thirdVC = [segue destinationViewController];
+    if([segue.identifier isEqualToString:@"thirdViewSegue"]) {
+        
+        thirdVC.selectedProduct = self.selectedProduct;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,6 +102,22 @@
         }
     }
     return cell;
+}
+
+//IMPORTANT - this is the DELEGATE happens when you press on the row
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSArray *productsArray = [self.selectedCompany.product_relationship allObjects];
+    NSNumber *indexNum = [NSNumber numberWithInteger:indexPath.row];
+    
+    for (int i=0; i < productsArray.count; i++) {
+        Product* selectedProduct = productsArray[i];
+        if ([selectedProduct.order_id isEqualToNumber:indexNum]) {
+            self.selectedProduct = selectedProduct;
+        }
+    }
+
+    [self performSegueWithIdentifier:@"thirdViewSegue" sender:self];
 }
 
 /*

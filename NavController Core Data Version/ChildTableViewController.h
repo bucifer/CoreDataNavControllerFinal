@@ -12,8 +12,7 @@
 
 @interface ChildTableViewController : UITableViewController <UITableViewDataSource>
 
-@property (strong, nonatomic) IBOutlet UILabel *childVCTitleLabel;
-
 @property (nonatomic) Company *selectedCompany;
+@property (nonatomic) Product *selectedProduct;
 
 @end
